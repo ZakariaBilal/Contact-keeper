@@ -16,7 +16,7 @@ router.post(
     check("name", "Please add a name")
       .not()
       .isEmpty(),
-    check("email", "please include a valid email").isEmail,
+    check("email", "please include a valid email").isEmail(),
     check(
       "password",
       "please enter a password with 6 characters minimum"
@@ -31,6 +31,7 @@ router.post(
     const { name, email, password } = req.body;
     try {
       let user = await User.findOne({ email });
+
       if (user) {
         return res.status(400).json({ msg: "User already exists" });
       } else {
@@ -64,7 +65,8 @@ router.post(
         );
       }
     } catch (err) {
-      console.error(err.msg);
+      console.error(err);
+
       res.status(500).send("server error");
     }
   }

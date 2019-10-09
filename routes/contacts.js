@@ -15,7 +15,7 @@ router.get("/", auth, async (req, res) => {
     });
     res.json(contacts);
   } catch (err) {
-    console.error(err.message);
+    console.error(err);
     res.status(500).send("Server Error");
   }
 });
@@ -46,7 +46,7 @@ router.post(
       const contact = await newContact.save();
       res.json(contact);
     } catch (err) {
-      console.error(err.message);
+      console.error(err);
       res.status(500).send("server error");
     }
   }
